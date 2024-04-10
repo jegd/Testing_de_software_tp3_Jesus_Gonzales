@@ -25,7 +25,6 @@ uint32_t consulta_RPM(maqEstados_entrada_t * maquina_a_consultar) {
             ((maquina_a_consultar->contador) * CONVERSION_SEG_A_MIN) / NUMERO_DE_ALETAS_VENTILADOR;
         maquina_a_consultar->contador = 0;
         printf("Las RPM son: %d \n\r", RPM);
-        lectura_ADC(27);
     }
     return RPM;
 }

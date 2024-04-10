@@ -45,12 +45,14 @@ extern "C" {
 
 /********************** inclusions *******************************************/
 #include <stdio.h>
+#include <stdbool.h>
 #include <assert.h>
-#include "pico/stdlib.h"
-#include "adc.h"
+#include <stdint.h>
+#include "stdlib.h"
 /********************** macros ***********************************************/
 
 /********************** typedef **********************************************/
+typedef uint8_t uint;
 /**
  * @brief   Puerto del microcontrolador
  */

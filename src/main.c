@@ -25,7 +25,7 @@ SPDX-License-Identifier: MIT
 
 /* === Headers files inclusions =============================================================== */
 
-#include "inc/main.h"
+#include "main.h"
 
 /* === Macros definitions ====================================================================== */
 
