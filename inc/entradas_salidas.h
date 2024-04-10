@@ -85,7 +85,7 @@ typedef struct {
  * @param pines_a_iniciar Dirección a los pines a inicializar
  * @param numGPIO Numero de pines a inicializar
  */
-void iniciacion_gpio(const puertoIO_t * pines_a_iniciar, uint8_t numGPIO);
+bool iniciacion_gpio(const puertoIO_t * pines_a_iniciar, uint8_t numGPIO);
 /**
  * @brief   Inicializalización de maquina de estados de entrada
  *

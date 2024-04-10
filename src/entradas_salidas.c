@@ -28,13 +28,14 @@ uint32_t consulta_RPM(maqEstados_entrada_t * maquina_a_consultar) {
     }
     return RPM;
 }
-void iniciacion_gpio(const puertoIO_t * pines_a_iniciar, uint8_t numGPIO) {
+bool iniciacion_gpio(const puertoIO_t * pines_a_iniciar, uint8_t numGPIO) {
     puertoIO_t * direcc_vector = (puertoIO_t *)pines_a_iniciar;
     for (int i = 0; i < numGPIO; i++) {
         gpio_init(direcc_vector->gpio);
         gpio_set_dir(direcc_vector->gpio, direcc_vector->type);
         direcc_vector++;
     }
+    return 1;
 }
 debounceState_t initMaqPulsador(maqEstados_entrada_t * maquina_a_iniciar,
                                 puertoIO_t * puerto_de_lectura, uint32_t tiempoAntirebote) {

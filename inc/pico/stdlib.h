@@ -4,7 +4,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include "entradas_salidas.h"
-
+typedef uint8_t uint;
 uint16_t i2c_readRegister(uint8_t registerAddress);
 uint32_t time_us_32();
 uint gpio_init(uint gpio);
