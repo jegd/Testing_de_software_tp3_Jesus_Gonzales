@@ -85,6 +85,7 @@ debounceState_t consultaMaq(maqEstados_entrada_t * maquina_a_consultar) {
         maquina_a_consultar->estado = INPUT_DOWN;
         break;
     }
+    return maquina_a_consultar->estado;
 }
 /************************FUNCIONES PUBLICAS************************/
 

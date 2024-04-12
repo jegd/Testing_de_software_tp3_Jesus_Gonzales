@@ -1,5 +1,5 @@
 # Trabajo Práctico Número 3
-Test de un módulo de una aplicación real
+Test de un módulo de una aplicación real  (módulo de lectura para de entrada de tacómetro con sensor inductivo)
 ## Uso del repositorio
 
 Este repositorio utiliza las siguientes herramientas:
