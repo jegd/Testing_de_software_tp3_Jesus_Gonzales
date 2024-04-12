@@ -46,6 +46,7 @@ debounceState_t initMaqPulsador(maqEstados_entrada_t * maquina_a_iniciar,
     maquina_a_iniciar->contador = 0;
     maquina_a_iniciar->ultimoTiempoConsultaRPM = 0;
     printf("La maquina de estados se inicializo: %d \n\r", maquina_a_iniciar->estado);
+    return maquina_a_iniciar->estado;
 }
 debounceState_t consultaMaq(maqEstados_entrada_t * maquina_a_consultar) {
     assert(&maquina_a_consultar != NULL);

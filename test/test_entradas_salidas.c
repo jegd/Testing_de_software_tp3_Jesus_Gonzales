@@ -4,12 +4,12 @@
 #include "entradas_salidas.h"
 #include "Mockstdlib.h"
 #include <assert.h>
-#define ANTIREBOTE    20U
-#define PIN_LECTURA   5U
-#define PIN_LECTURA_2 6U
-#define PIN_LECTURA_3 2U
-#define INPUT         0U
-#define OUTPUT        1U
+#define ANTIREBOTE    20U // Tiempo de antirebote en us
+#define PIN_LECTURA   5U  // Pin de lectura
+#define PIN_LECTURA_2 6U  // Pin de lectura
+#define PIN_LECTURA_3 2U  // Pin de lectura
+#define INPUT         0U  // Pin de lectura
+#define OUTPUT        1U  // Pin de lectura
 
 maqEstados_entrada_t maquina_pruebas;
 puertoIO_t puerto_pruebas[] = {{.gpio = PIN_LECTURA, .type = INPUT},
@@ -18,7 +18,6 @@ puertoIO_t puerto_pruebas[] = {{.gpio = PIN_LECTURA, .type = INPUT},
 debounceState_t estado_pruebas;
 uint8_t numero_de_gpio;
 
-// Probar que se inicializa en estado down la maquina de estado
 // Probar si se manda un valor ramdom a inicio de gpio y maquina de estado
 // test_maquina_de_estado_inicializa_en_estado_DOWN
 // Se consulta la máquina de estado para conocer en qué estado se encuentra
@@ -47,4 +46,9 @@ void test_inicio_adecuado_de_gpio(void) {
     gpio_set_dir_StubWithCallback((CMOCK_gpio_set_dir_CALLBACK)auxiliar_gpio_set_dir);
     TEST_ASSERT_EQUAL_UINT16(
         1, iniciacion_gpio(puerto_pruebas, sizeof(puerto_pruebas) / sizeof(puertoIO_t)));
+}
+// Probar que se inicializa en estado down la maquina de estado
+void test_inicio_en_estado_down_de_maquina_de_estados(void) {
+    TEST_ASSERT_EQUAL(INPUT_DOWN,
+                      initMaqPulsador(&maquina_pruebas, &(puerto_pruebas[0]), ANTIREBOTE));
 }
