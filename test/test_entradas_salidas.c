@@ -18,13 +18,20 @@ puertoIO_t puerto_pruebas[] = {{.gpio = PIN_LECTURA, .type = INPUT},
 debounceState_t estado_pruebas;
 uint8_t numero_de_gpio;
 
-// Probar que inicializan adecuada de las gpio
 // Probar que se inicializa en estado down la maquina de estado
 // Probar si se manda un valor ramdom a inicio de gpio y maquina de estado
 // test_maquina_de_estado_inicializa_en_estado_DOWN
 // Se consulta la máquina de estado para conocer en qué estado se encuentra
 // Se consultan las RPM del sensado
+uint auxiliar_gpio_init(uint8_t numGPIO, int call_count) {
+    assert(&numGPIO != NULL);
+    return 1;
+}
 
+uint auxiliar_gpio_set_dir(uint gpio, bool type, int call_count) {
+
+    return 1;
+}
 // Evaluando valores validos para los gpio
 void test_valores_de_array_puertos_esperados(void) {
     puertoIO_t * puerto_test = (puertoIO_t *)puerto_pruebas;
@@ -34,4 +41,11 @@ void test_valores_de_array_puertos_esperados(void) {
         }
         TEST_ASSERT_EQUAL_UINT16(0, puerto_pruebas->type);
     }
+}
+// Probar que inicializan adecuada de las gpio
+void test_inicio_adecuado_de_gpio(void) {
+    gpio_init_StubWithCallback((CMOCK_gpio_init_CALLBACK)auxiliar_gpio_init);
+    gpio_set_dir_StubWithCallback((CMOCK_gpio_set_dir_CALLBACK)auxiliar_gpio_set_dir);
+    TEST_ASSERT_EQUAL_UINT16(
+        1, iniciacion_gpio(puerto_pruebas, sizeof(puerto_pruebas) / sizeof(puertoIO_t)));
 }
