@@ -21,8 +21,6 @@ uint8_t numero_de_gpio;
 bool valor_de_lectura_de_pin = 0;
 uint32_t valor_tiempo_para_prueba = 0;
 
-// Se consulta la máquina de estado para conocer en qué estado se encuentra
-// Se consultan las RPM del sensado
 uint auxiliar_gpio_init(uint8_t numGPIO, int call_count) {
     assert(&numGPIO != NULL);
     return 1;
@@ -85,5 +83,31 @@ void test_consulta_correcta_de_maquina_de_estados(void) {
     valor_tiempo_para_prueba = 10;
     maquina_pruebas_1.estado = INPUT_DOWN;
     valor_de_lectura_de_pin = 0;
+    TEST_ASSERT_EQUAL(INPUT_DOWN, consultaMaq(&maquina_pruebas_1));
+}
+// Probar siguiendo secuncia de lectura de subida y bajada
+void test_probando_secuencia_de_lectura(void) {
+    gpio_get_StubWithCallback((CMOCK_gpio_get_CALLBACK)auxiliar_gpio_get);
+    time_us_32_StubWithCallback((CMOCK_time_us_32_CALLBACK)auxiliar_time_us_32);
+    maquina_pruebas_1.ultimoTiempoLectura = 0;
+    valor_tiempo_para_prueba = 10;
+    maquina_pruebas_1.estado = INPUT_DOWN;
+    valor_de_lectura_de_pin = 0;
+    TEST_ASSERT_EQUAL(INPUT_DOWN, consultaMaq(&maquina_pruebas_1));
+    valor_de_lectura_de_pin = 1;
+    valor_tiempo_para_prueba = ANTIREBOTE + 2;
+    TEST_ASSERT_EQUAL(INPUT_RAISING, consultaMaq(&maquina_pruebas_1));
+    printf("ultimo tiempo de lectura %u \n", maquina_pruebas_1.ultimoTiempoLectura);
+    printf("tiempo actual leido %u \n", valor_tiempo_para_prueba);
+    valor_tiempo_para_prueba = valor_tiempo_para_prueba + 40;
+    TEST_ASSERT_EQUAL(INPUT_UP, consultaMaq(&maquina_pruebas_1));
+    valor_de_lectura_de_pin = 0;
+    printf("ultimo tiempo de lectura %u \n", maquina_pruebas_1.ultimoTiempoLectura);
+    printf("tiempo actual leido %u \n", valor_tiempo_para_prueba);
+    valor_tiempo_para_prueba = valor_tiempo_para_prueba + 40;
+    TEST_ASSERT_EQUAL(INPUT_FALLING, consultaMaq(&maquina_pruebas_1));
+    printf("ultimo tiempo de lectura %u \n", maquina_pruebas_1.ultimoTiempoLectura);
+    printf("tiempo actual leido %u \n", valor_tiempo_para_prueba);
+    valor_tiempo_para_prueba = valor_tiempo_para_prueba + 40;
     TEST_ASSERT_EQUAL(INPUT_DOWN, consultaMaq(&maquina_pruebas_1));
 }
