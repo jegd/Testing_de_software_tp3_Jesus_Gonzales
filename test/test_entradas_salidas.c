@@ -29,7 +29,6 @@ uint auxiliar_gpio_init(uint8_t numGPIO, int call_count) {
 }
 
 uint auxiliar_gpio_set_dir(uint gpio, bool type, int call_count) {
-
     return 1;
 }
 // Evaluando valores validos para los gpio
